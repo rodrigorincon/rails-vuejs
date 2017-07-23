@@ -1,2 +1,8 @@
-rails4_with_gem_vuejs-rails/tmp/*
+rails4_with_gem_vuejs-rails/tmp
 rails4_with_gem_vuejs-rails/log/*
+rails4_with_gem_vuejs-rails/!/log/.keep
+
+rails4_with_gem_vuejs-rails/db/*.sqlite3
+rails4_with_gem_vuejs-rails/db/*.sqlite3-journal
+
+/.bundle
