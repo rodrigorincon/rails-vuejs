@@ -1,3 +1,30 @@
+<script type="text/x-template" id="employee-row">
+  <tr v-if="editMode">
+    <td>
+      <input type="text" v-model="employee.name"><br>
+      <span style="color:red">{{ errors.name }}</span>
+    </td>
+    <td>
+      <input type="text" v-model="employee.email"><br>
+      <span style="color:red">{{ errors.email }}</span>
+    </td>
+    <td>
+      <input type="checkbox" v-model="employee.manager">
+    </td>
+    <td>
+      <button @click="updateEmployee">Save</button>
+    </td>
+  </tr>
+  <tr v-else>
+    <td>{{ employee.name }}</td>
+    <td>{{ employee.email }}</td>
+    <td>{{ employee.manager ? '&#10004;' : '' }}</td>
+    <td><button @click="editMode = true">Edit</button></td>
+    <td><button @click="toggleManagerStatus">{{ employee.manager ? 'Demote' : 'Promote' }}</button></td>
+    <td><button @click="fireEmployee" style="color:red">Fire</button></td>
+  </tr>
+</script>
+
 <h1>Employees</h1>
 
 <div id="employees">
@@ -10,11 +37,28 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="employee in employees">
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.email }}</td>
-        <td>{{ employee.manager }}</td>
+      <!-- this TR is a vue-component "employee-row" and pass the object as prop(tag attribute) for the component -->
+      <tr is="employee-row" v-for="employee in employees" :employee="employee">
       </tr>
+      
+      <!-- extra line for insert a new employee -->
+      <tr>
+        <td>
+          <input type="text" v-model="new_employee.name"><br>
+          <span style="color:red">{{ errors.name }}</span>
+        </td>
+        <td>
+          <input type="text" v-model="new_employee.email"><br>
+          <span style="color:red">{{ errors.email }}</span>
+        </td>
+        <td>
+          <input type="checkbox" v-model="new_employee.manager">
+        </td>
+        <td>
+          <button @click="hireEmployee">Save</button>
+        </td>
+      </tr>
+
     </tbody>
   </table>
 </div>
